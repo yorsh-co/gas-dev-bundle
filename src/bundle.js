@@ -81,7 +81,7 @@ function checkSyntax(code) {
  * outside the cache.
  *
  * @param {object} options
- * @param {Record<string, string | { version: string, repository?: string }>} options.libraries Same shape as `gasDevBundle.libraries`.
+ * @param {Record<string, string | { version: string, repository?: string }>} options.libraries Same shape as `gasDevBundle.libraries`; may be empty.
  * @param {string} [options.cwd] Project root; default `process.cwd()`.
  * @param {string} [options.cacheDir] Default `<cwd>/node_modules/.cache/gas-dev-bundle`.
  * @param {string[]} [options.extraFiles] Absolute `.js` paths appended after the libraries, in order.
@@ -101,7 +101,7 @@ export function bundle({
       throw new BundleError(`extraFiles entry must be absolute: ${file}`);
     }
   }
-  const configured = normalizeLibraries(libraries, 'libraries');
+  const configured = normalizeLibraries(libraries, 'libraries', true);
 
   /** @type {Map<string, Fetched>} */
   const fetched = new Map();

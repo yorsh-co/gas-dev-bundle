@@ -49,11 +49,17 @@ function rejectUnknownKeys(object, known, path) {
  *
  * @param {unknown} libraries A map of name to a range string or `{ version, repository? }`.
  * @param {string} path Key path used in error messages.
+ * @param {boolean} [allowEmpty] Whether an empty map is valid.
  * @returns {Record<string, LibraryConfig>}
  * @throws {BundleError} On any invalid entry.
  */
-export function normalizeLibraries(libraries, path) {
-  if (!isObject(libraries) || Object.keys(libraries).length === 0) {
+export function normalizeLibraries(libraries, path, allowEmpty = false) {
+  if (!isObject(libraries)) {
+    throw new BundleError(
+      `${path} must be ${allowEmpty ? 'an' : 'a non-empty'} object.`,
+    );
+  }
+  if (!allowEmpty && Object.keys(libraries).length === 0) {
     throw new BundleError(`${path} must be a non-empty object.`);
   }
   /** @type {Record<string, LibraryConfig>} */
