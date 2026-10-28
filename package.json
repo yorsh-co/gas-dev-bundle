@@ -1,0 +1,61 @@
+{
+  "name": "gas-dev-bundle",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bundles gas-* Google Apps Script libraries from their dist tags into one global script file.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yorsh-co/gas-dev-bundle.git"
+  },
+  "author": "Joshua Porter",
+  "license": "MIT",
+  "yorsh": {
+    "organization": "Yorsh",
+    "homepage": "https://yorsh.co"
+  },
+  "engines": {
+    "node": ">=20.10.0"
+  },
+  "type": "module",
+  "bin": {
+    "gas-dev-bundle": "bin/gas-dev-bundle.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./types.d.ts",
+      "default": "./src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin",
+    "src",
+    "types.d.ts"
+  ],
+  "prettier": "gas-dev-config/prettier",
+  "dependencies": {
+    "semver": "^7.8.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/semver": "^7.7.0",
+    "eslint": "^10.7.0",
+    "gas-dev-config": "github:yorsh-co/gas-dev-config#semver:^1.2.0",
+    "prettier": "^3.9.6",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.3"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit && echo '✓ TypeScript passed'",
+    "lint": "eslint . && echo '✓ Lint passed'",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test && gas-dev-config check",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "gasDevConfig": {
+    "preset": "node"
+  }
+}

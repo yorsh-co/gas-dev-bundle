@@ -1,0 +1,4 @@
+{
+  "extends": "gas-dev-config/tsconfig/node.json",
+  "include": ["bin/**/*.js", "src/**/*.js", "test/**/*.js"]
+}
