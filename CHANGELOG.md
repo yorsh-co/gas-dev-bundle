@@ -2,6 +2,14 @@
 
 ---
 
+## [1.1.0] - 2026-10-28
+
+### Changed
+
+- `bundle()` accepts an empty `libraries` map, bundling only `extraFiles`; the `gasDevBundle` config still requires at least one library
+
+---
+
 ## [1.0.0] - 2026-10-28
 
 ### Added
