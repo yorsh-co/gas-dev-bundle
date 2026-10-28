@@ -11,7 +11,7 @@ export interface ResolvedLibrary {
 }
 
 export interface BundleOptions {
-  /** Same shape as `gasDevBundle.libraries`. */
+  /** Same shape as `gasDevBundle.libraries`; may be empty when only `extraFiles` are bundled. */
   libraries: Record<string, LibrarySpec>;
   /** Project root; default `process.cwd()`. */
   cwd?: string;

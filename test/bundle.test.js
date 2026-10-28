@@ -1,5 +1,5 @@
 // @ts-check
-import { existsSync, mkdirSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 import { bundle } from '../src/index.js';
@@ -358,6 +358,24 @@ describe('library metadata', () => {
         gasLibrary: { loadOrder: ['gas-a.js'], peers: { 'gas-b': 'nope' } },
       }),
     ).toThrow(/gasLibrary\.peers\.gas-b must be a valid semver range/);
+  });
+});
+
+describe('without libraries', () => {
+  it('bundles only the extra files', () => {
+    const sandbox = createSandbox();
+    const extra = join(sandbox, 'extra.js');
+    writeFileSync(extra, '"use strict";\nvar onlyExtra = 1;\n');
+    const { result } = run({
+      libraries: {},
+      extraFiles: [extra],
+      ...project(sandbox),
+    });
+    expect(result.resolved).toEqual([]);
+    expect(result.code).toContain(
+      '// ---- extra.js ----\nvar onlyExtra = 1;\n',
+    );
+    expect(result.code).not.toContain('"use strict";');
   });
 });
 

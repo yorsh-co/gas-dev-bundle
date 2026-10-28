@@ -1,6 +1,6 @@
 {
   "name": "gas-dev-bundle",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Bundles gas-* Google Apps Script libraries from their dist tags into one global script file.",
   "repository": {
