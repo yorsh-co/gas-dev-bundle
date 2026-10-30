@@ -5,6 +5,9 @@
 > [!NOTE]
 > `gas-dev-bundle` is development tooling. It is installed as a dev dependency and is never pushed to Apps Script; only the generated bundle is.
 
+> [!TIP]
+> One of three gas-dev-\* tools. See [how they fit together](https://github.com/yorsh-co/gas-dev-config#gas-dev-tools) in gas-dev-config's README.
+
 > [!NOTE]
 > `1.0.0` is the first release. It consumes the `gasLibrary` metadata that `gas-dev-release` >= 1.1.0 writes to each `dist` tag.
 

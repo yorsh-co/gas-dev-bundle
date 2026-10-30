@@ -6,6 +6,7 @@
 
 ### Changed
 
+- README: links to the overview of the gas-dev-\* tools in gas-dev-config's README
 - README: install `^1.1.1`, the first version that keeps the libraries' strict mode
 
 ---
