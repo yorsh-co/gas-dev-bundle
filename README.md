@@ -32,7 +32,7 @@
 ## Install
 
 ```bash
-npm install -D github:yorsh-co/gas-dev-bundle#semver:^1.0.0
+npm install -D github:yorsh-co/gas-dev-bundle#semver:^1.1.1
 ```
 
 Add a script so the bundle is easy to refresh:

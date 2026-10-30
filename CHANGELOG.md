@@ -2,6 +2,14 @@
 
 ---
 
+## [Unreleased]
+
+### Changed
+
+- README: install `^1.1.1`, the first version that keeps the libraries' strict mode
+
+---
+
 ## [1.1.1] - 2026-10-30
 
 ### Fixed
