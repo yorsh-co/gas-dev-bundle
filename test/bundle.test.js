@@ -1,6 +1,7 @@
 // @ts-check
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { runInNewContext } from 'node:vm';
 import { afterEach, describe, expect, it } from 'vitest';
 import { bundle } from '../src/index.js';
 import {
@@ -181,7 +182,7 @@ describe('ordering', () => {
 });
 
 describe('generated code', () => {
-  it('writes a deterministic header, markers and strips "use strict";', () => {
+  it('writes a deterministic header, one directive and markers', () => {
     const sandbox = createSandbox();
     const a = createLibrary(sandbox, 'gas-a', [
       {
@@ -211,11 +212,12 @@ describe('generated code', () => {
         `// gas-a 1.0.0 (${shaA})`,
         `// gas-b 2.0.0 (${shaB})`,
         '',
+        "'use strict';",
+        '',
         '// ---- gas-a/gas-a.constants.js ----',
         'const A = 1;',
         '',
         '// ---- gas-a/sub/x.js ----',
-        "'use strict';",
         'const X = 2; // "use strict";',
         '',
         '// ---- gas-b/gas-b.js ----',
@@ -376,6 +378,20 @@ describe('without libraries', () => {
       '// ---- extra.js ----\nvar onlyExtra = 1;\n',
     );
     expect(result.code).not.toContain('"use strict";');
+  });
+
+  it('runs every file in strict mode', () => {
+    const sandbox = createSandbox();
+    const extra = join(sandbox, 'sloppy.js');
+    writeFileSync(extra, 'undeclared = 1;\n');
+    const { result } = run({
+      libraries: {},
+      extraFiles: [extra],
+      ...project(sandbox),
+    });
+    expect(() => runInNewContext(result.code)).toThrow(
+      /undeclared is not defined/,
+    );
   });
 });
 
