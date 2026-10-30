@@ -2,6 +2,15 @@
 
 ---
 
+## [1.1.1] - 2026-10-30
+
+### Fixed
+
+- `'use strict';` lines are now stripped like `"use strict";`; previously the single-quoted directive of Prettier-formatted releases survived, so whether the bundle ran in strict mode depended on its first file
+- The bundle starts with one `'use strict';` directive after the header, so every file, including `extraFiles`, keeps the strict mode of its source
+
+---
+
 ## [1.1.0] - 2026-10-28
 
 ### Changed
