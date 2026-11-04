@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Bundle and types headers and the CLI summary show each library's docs link: `https://github.com/<owner>/<repo>/tree/dist/v<version>` for GitHub repositories, otherwise the configured repository with credentials removed
+
 ### Changed
 
 - README: links to the overview of the gas-dev-\* tools in gas-dev-config's README
