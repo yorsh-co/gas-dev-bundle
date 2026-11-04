@@ -2,6 +2,14 @@
 
 ---
 
+## [Unreleased]
+
+### Changed
+
+- **Breaking:** requires Node ^22.13.0, ^24.0.0 or >=26.0.0 (was >=20.10.0)
+
+---
+
 ## [1.2.0] - 2026-11-04
 
 ### Added
