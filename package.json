@@ -1,6 +1,6 @@
 {
   "name": "gas-dev-bundle",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "private": true,
   "description": "Bundles gas-* Google Apps Script libraries from their dist tags into one global script file.",
   "repository": {
@@ -14,7 +14,7 @@
     "homepage": "https://yorsh.co"
   },
   "engines": {
-    "node": ">=20.10.0"
+    "node": "^22.13.0 || ^24.0.0 || >=26.0.0"
   },
   "type": "module",
   "bin": {

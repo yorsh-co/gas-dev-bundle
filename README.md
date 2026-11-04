@@ -28,7 +28,7 @@
 
 ## Requirements
 
-- Node.js >= 20.10
+- Node.js ^22.13.0, ^24.0.0 or >=26.0.0
 - git, with access to the libraries' repositories
 - Libraries released with `gas-dev-release` >= 1.1.0 and `gasDevConfig.loadOrder`, so each `dist/vX.Y.Z` tag carries `gasLibrary` metadata
 
