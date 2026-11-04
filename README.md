@@ -77,7 +77,7 @@ gas-dev-bundle
 | `-h`, `--help` | Show usage       |
 | `--version`    | Show the version |
 
-The command takes no positional arguments. It prints one line per bundled library (name, version, short SHA), the written paths and a reminder about load order.
+The command takes no positional arguments. It prints one line per bundled library (name, version, short SHA, docs link), the written paths and a reminder about load order.
 
 | Exit code | Meaning                                                        |
 | --------- | -------------------------------------------------------------- |
