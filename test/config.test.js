@@ -127,7 +127,16 @@ describe('docsUrl', () => {
     'https://gitlab.com/o/r.git',
     'https://github.com/o/r/extra',
     '/abs/path/to/repo',
+    'https://github.com.evil/o/r',
+    'http://github.com/o/r',
   ])('returns %s unchanged', (repository) => {
     expect(docsUrl(repository, '1.0.0')).toBe(repository);
+  });
+
+  it.each([
+    ['https://user:token@gitlab.com/o/r.git', 'https://gitlab.com/o/r.git'],
+    ['https://user@github.com/o/r', 'https://github.com/o/r'],
+  ])('strips credentials from %s', (repository, expected) => {
+    expect(docsUrl(repository, '1.0.0')).toBe(expected);
   });
 });

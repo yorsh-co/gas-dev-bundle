@@ -139,7 +139,7 @@ Every file is emitted under a `// ---- <library>/<path> ----` marker with its `"
 // ---- gas-lock/gas-lock.constants.js ----
 ```
 
-GitHub repositories link to `https://github.com/<owner>/<repo>/tree/dist/v<version>`; other repositories appear as configured.
+GitHub repositories link to `https://github.com/<owner>/<repo>/tree/dist/v<version>`; other repositories appear as configured, with any credentials removed.
 
 ## Types
 
