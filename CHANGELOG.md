@@ -8,6 +8,8 @@
 
 - README: links to the overview of the gas-dev-\* tools in gas-dev-config's README
 - README: install `^1.1.1`, the first version that keeps the libraries' strict mode
+- Requires `gas-dev-config` `^1.9.0`
+- `.prettierignore` lists `.claude/worktrees`, `.claude/plans` and `.claude/handoff`, as required by `gas-dev-config check`
 
 ---
 
