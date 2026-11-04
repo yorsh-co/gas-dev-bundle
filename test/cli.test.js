@@ -78,8 +78,8 @@ describe('gas-dev-bundle CLI', () => {
     const sha = (/** @type {string} */ repo) =>
       git(repo, 'rev-parse', 'HEAD').slice(0, 7);
     expect(result.stdout.split('\n').slice(0, 4)).toEqual([
-      `gas-lock 1.2.0 (${sha(lock)})`,
-      `gas-sheetdb 2.1.0 (${sha(db)})`,
+      `gas-lock 1.2.0 (${sha(lock)}) ${lock}`,
+      `gas-sheetdb 2.1.0 (${sha(db)}) ${db}`,
       'Wrote src/lib/gas-libraries.js',
       'Wrote types/gas-libraries.d.ts',
     ]);

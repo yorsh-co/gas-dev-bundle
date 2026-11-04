@@ -19,9 +19,27 @@ import { BundleError } from './errors.js';
 
 export const DEFAULT_OUT_FILE = 'src/gas-libraries.js';
 const DEFAULT_ORG = 'https://github.com/yorsh-co';
+const GITHUB_PATTERN =
+  /^(?:git\+)?(?:https:\/\/github\.com\/|ssh:\/\/git@github\.com\/|git@github\.com:|github:)([\w.-]+)\/([\w.-]+?)(?:\.git)?\/?$/;
 const NAME_PATTERN = /^[a-z0-9][a-z0-9._-]*$/;
 const CONFIG_KEYS = ['libraries', 'outFile', 'typesFile'];
 const LIBRARY_KEYS = ['version', 'repository'];
+
+/**
+ * Browsable documentation link for a released library version. GitHub
+ * repositories map to the version-pinned dist tag; any other repository is
+ * returned as configured with URL credentials (userinfo) removed.
+ *
+ * @param {string} repository
+ * @param {string} version
+ * @returns {string}
+ */
+export function docsUrl(repository, version) {
+  const match = GITHUB_PATTERN.exec(repository);
+  return match
+    ? `https://github.com/${match[1]}/${match[2]}/tree/dist/v${version}`
+    : repository.replace(/^([a-z][a-z0-9+.-]*:\/\/)[^@/]+@/i, '$1');
+}
 
 /**
  * @param {unknown} value

@@ -1,6 +1,6 @@
 // @ts-check
 import { afterEach, describe, expect, it } from 'vitest';
-import { loadConfig } from '../src/config.js';
+import { docsUrl, loadConfig } from '../src/config.js';
 import { BundleError } from '../src/errors.js';
 import { cleanup, createProject, createSandbox } from './helpers/fixtures.js';
 
@@ -99,5 +99,44 @@ describe('loadConfig', () => {
     expect(() => loadConfig(createSandbox())).toThrow(
       /Cannot read package\.json/,
     );
+  });
+});
+
+describe('docsUrl', () => {
+  const url = 'https://github.com/yorsh-co/gas-lock/tree/dist/v1.2.0';
+
+  it.each([
+    'https://github.com/yorsh-co/gas-lock.git',
+    'https://github.com/yorsh-co/gas-lock',
+    'https://github.com/yorsh-co/gas-lock/',
+    'git+https://github.com/yorsh-co/gas-lock.git',
+    'git@github.com:yorsh-co/gas-lock.git',
+    'ssh://git@github.com/yorsh-co/gas-lock.git',
+    'github:yorsh-co/gas-lock',
+  ])('maps %s to the dist tag', (repository) => {
+    expect(docsUrl(repository, '1.2.0')).toBe(url);
+  });
+
+  it('keeps dots inside the repository name', () => {
+    expect(docsUrl('https://github.com/o/gas.x.git', '1.0.0')).toBe(
+      'https://github.com/o/gas.x/tree/dist/v1.0.0',
+    );
+  });
+
+  it.each([
+    'https://gitlab.com/o/r.git',
+    'https://github.com/o/r/extra',
+    '/abs/path/to/repo',
+    'https://github.com.evil/o/r',
+    'http://github.com/o/r',
+  ])('returns %s unchanged', (repository) => {
+    expect(docsUrl(repository, '1.0.0')).toBe(repository);
+  });
+
+  it.each([
+    ['https://user:token@gitlab.com/o/r.git', 'https://gitlab.com/o/r.git'],
+    ['https://user@github.com/o/r', 'https://github.com/o/r'],
+  ])('strips credentials from %s', (repository, expected) => {
+    expect(docsUrl(repository, '1.0.0')).toBe(expected);
   });
 });

@@ -2,6 +2,25 @@
 
 ---
 
+## [1.2.0] - 2026-11-04
+
+### Added
+
+- Bundle and types headers and the CLI summary show each library's docs link: `https://github.com/<owner>/<repo>/tree/dist/v<version>` for GitHub repositories, otherwise the configured repository with credentials removed
+
+### Changed
+
+- README: links to the overview of the gas-dev-\* tools in gas-dev-config's README
+- README: install `^1.1.1`, the first version that keeps the libraries' strict mode
+- Requires `gas-dev-config` `^1.9.0`
+- `.prettierignore` lists `.claude/worktrees`, `.claude/plans` and `.claude/handoff`, as required by `gas-dev-config check`
+
+### Fixed
+
+- Overrides transitive `minimatch` to `^11.0.1` (GHSA-g3hv-75wg-m249), which also lifts `brace-expansion` to `5.0.12`; see `gas-dev-config` ADR 0005
+
+---
+
 ## [1.1.1] - 2026-10-30
 
 ### Fixed
