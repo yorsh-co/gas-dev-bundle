@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { basename, isAbsolute, join, resolve } from 'node:path';
 import semver from 'semver';
-import { normalizeLibraries } from './config.js';
+import { docsUrl, normalizeLibraries } from './config.js';
 import { BundleError } from './errors.js';
 import { fetchLibrary, resolveVersion } from './fetch.js';
 import { listDeclarations, readLibrary } from './library.js';
@@ -50,7 +50,8 @@ function stripUseStrict(source) {
  */
 function header(resolved) {
   const lines = resolved.map(
-    ({ name, version, sha }) => `// ${name} ${version} (${sha})\n`,
+    ({ name, version, sha, repository }) =>
+      `// ${name} ${version} (${sha})\n//   ${docsUrl(repository, version)}\n`,
   );
   return `${HEADER}${lines.join('')}`;
 }

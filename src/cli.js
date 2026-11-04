@@ -4,7 +4,7 @@ import { dirname, join } from 'node:path';
 import { parseArgs } from 'node:util';
 import pkg from '../package.json' with { type: 'json' };
 import { bundle } from './bundle.js';
-import { loadConfig } from './config.js';
+import { docsUrl, loadConfig } from './config.js';
 import { BundleError } from './errors.js';
 
 const OPTIONS = /** @type {const} */ ({
@@ -81,7 +81,8 @@ export function main(argv) {
     writeProjectFile(cwd, config.outFile, code);
     if (config.typesFile) writeProjectFile(cwd, config.typesFile, types);
     const lines = resolved.map(
-      ({ name, version, sha }) => `${name} ${version} (${sha.slice(0, 7)})`,
+      ({ name, version, sha, repository }) =>
+        `${name} ${version} (${sha.slice(0, 7)}) ${docsUrl(repository, version)}`,
     );
     lines.push(`Wrote ${config.outFile}`);
     if (config.typesFile) lines.push(`Wrote ${config.typesFile}`);
