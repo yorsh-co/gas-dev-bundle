@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Deprecated
+
+- `gas-dev-bundle` is folded into [gasdev](https://github.com/yorsh-co/gasdev) as `gasdev bundle` (and the `gasdev/bundle` export); the repository is archived and receives no further releases
+
 ---
 
 ## [2.0.0] - 2026-11-04
